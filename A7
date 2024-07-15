@@ -1,0 +1,26 @@
+#include <iostream>
+#include <vector>
+#include <chrono>
+
+// Unoptimized sum function
+long long sumVector(const std::vector<int>& vec) {
+    long long sum = 0;
+    for (size_t i = 0; i < vec.size(); ++i) {
+        sum += vec[i];
+    }
+    return sum;
+}
+
+int main() {
+    std::vector<int> vec(1000000, 1); // Large vector with 1 million elements, all set to 1
+
+    auto start = std::chrono::high_resolution_clock::now();
+    long long sum = sumVector(vec);
+    auto end = std::chrono::high_resolution_clock::now();
+    
+    std::chrono::duration<double> duration = end - start;
+    std::cout << "Sum: " << sum << "\n";
+    std::cout << "Unoptimized duration: " << duration.count() << " seconds\n";
+
+    return 0;
+}
